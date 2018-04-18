@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 showToast(String.valueOf(expectedIncome));
                 showToast(String.valueOf(rentMorgage));
                 showToast(String.valueOf(bills));
+                //does this work
             }
         });
     }
