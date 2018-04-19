@@ -11,13 +11,15 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    //user input variables
     double expectedIncome;
-    double rentMorgage;
+    double rentMortgage;
     double bills;
     double leftover;
 
+    //layout fields
     EditText expectedInput;
-    EditText rentmorgageInput;
+    EditText rentmortgageInput;
     EditText billsInput;
 
     Button calculateButton;
@@ -27,25 +29,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //link variables with those in layout
         expectedInput = findViewById(R.id.expectedInput);
-        rentmorgageInput = findViewById(R.id.rentmorgageInput);
+        rentmortgageInput = findViewById(R.id.rentmortgageInput);
         billsInput = findViewById(R.id.billsInput);
 
         calculateButton = findViewById(R.id.calculateButton);
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //assign user input to variables
                 expectedIncome = Double.valueOf(expectedInput.getText().toString());
-                rentMorgage = Double.valueOf(rentmorgageInput.getText().toString());
+                rentMortgage = Double.valueOf(rentmortgageInput.getText().toString());
                 bills = Double.valueOf(billsInput.getText().toString());
-                leftover = expectedIncome - rentMorgage - bills;
+                leftover = expectedIncome - rentMortgage - bills;
+
                 final TextView leftoverOutput = findViewById(R.id.leftoverOutput);
 
+                //display values
                 leftoverOutput.setText(String.valueOf(leftover));
                 showToast(String.valueOf(expectedIncome));
-                showToast(String.valueOf(rentMorgage));
+                showToast(String.valueOf(rentMortgage));
                 showToast(String.valueOf(bills));
-                //does this work
+                showToast("Calculation Complete");
             }
         });
     }

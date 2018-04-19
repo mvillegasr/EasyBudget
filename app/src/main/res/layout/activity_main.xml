@@ -38,11 +38,11 @@
             android:textSize="35sp" />
 
         <EditText
-            android:id="@+id/rentmorgageInput"
+            android:id="@+id/rentmortgageInput"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Rent/Morgage"
+            android:hint="Rent/Mortgage"
             android:inputType="numberDecimal"
             android:textSize="35sp" />
 

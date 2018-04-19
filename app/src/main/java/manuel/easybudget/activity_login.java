@@ -1,0 +1,53 @@
+package manuel.easybudget;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Button;
+import android.widget.Toast;
+
+public class activity_login extends AppCompatActivity {
+
+    String username;
+    String password;
+
+    EditText usernameInput;
+    EditText passwordInput;
+    Button loginButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
+        usernameInput = findViewById(R.id.usernameInput);
+        passwordInput = findViewById(R.id.passwordInput);
+        loginButton = findViewById(R.id.loginButton);
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                username = (usernameInput.getText().toString());
+                password = (passwordInput.getText().toString());
+
+                if(username.equals("user") && password.equals("123")) {
+
+                    //redirect to MainActivity
+                    showToast("Login Successful");
+                    Intent intent=new Intent(activity_login.this,MainActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    showToast("Invalid username/password");
+                }
+            }
+        });
+    }
+
+    private void showToast(String text) {
+        Toast.makeText(activity_login.this, text, Toast.LENGTH_SHORT).show();
+    }
+}
