@@ -13,8 +13,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    DatabaseHelper mDatabaseHelper;
-
     //user input variables
     double expectedIncome;
     double rentMortgage;
@@ -38,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
         rentmortgageInput = findViewById(R.id.rentmortgageInput);
         billsInput = findViewById(R.id.billsInput);
 
-        mDatabaseHelper = new DatabaseHelper(this);
-
         calculateButton = findViewById(R.id.calculateButton);
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,14 +46,6 @@ public class MainActivity extends AppCompatActivity {
                 rentMortgage = Double.valueOf(rentmortgageInput.getText().toString());
                 bills = Double.valueOf(billsInput.getText().toString());
                 leftover = expectedIncome - rentMortgage - bills;
-
-                String newEntry = expectedInput.getText().toString();
-                if (expectedInput.length() != 0) {
-                    AddData(newEntry);
-                }
-                else {
-                    showToast("Field is empty");
-                }
 
                 final TextView leftoverOutput = findViewById(R.id.leftoverOutput);
 
@@ -71,17 +59,6 @@ public class MainActivity extends AppCompatActivity {
                 showToast("Calculation Complete");
             }
         });
-    }
-
-    public void AddData(String newEntry) {
-        boolean insertData = mDatabaseHelper.addData(newEntry);
-
-        if(insertData) {
-            showToast("Data Successfully Inserted!");
-        }
-        else {
-            showToast("Unsuccessful");
-        }
     }
 
     private void showToast(String text) {
