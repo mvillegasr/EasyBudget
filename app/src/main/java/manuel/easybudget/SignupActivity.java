@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 public class SignupActivity extends AppCompatActivity {
 
-    DatabaseHelper mDatabaseHelper = new DatabaseHelper(this);;
+    DatabaseHelper mDatabaseHelper = new DatabaseHelper(this);
 
     String  personName, uname, passwd;
 

@@ -12,6 +12,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "DatabaseHelper";
 
     private static final String TABLE_NAME = "budget_table";
+    private static final String COL0 = "id";
     private static final String COL1 = "name";
     private static final String COL2 = "username";
     private static final String COL3 = "password";
@@ -23,7 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+        String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY NOT NULL, " +
                 COL1 +" TEXT, " + COL2 +" TEXT, " + COL3 +" TEXT, " + COL4 + " TEXT)";
         db.execSQL(createTable);
     }
@@ -38,6 +39,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean addUser(User newuser) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+
+        String query = "SELECT * from budget_table";
+        Cursor cursor = db.rawQuery(query, null);
+        int count = cursor.getCount();
+
+        contentValues.put(COL0, count);
         contentValues.put(COL1, newuser.getName());
         contentValues.put(COL2, newuser.getUsername());
         contentValues.put(COL3, newuser.getPassword());
@@ -54,10 +61,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public Cursor getData() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME;
-        Cursor data = db.rawQuery(query, null);
-        return data;
+    //get the password for the corresponding username
+    public String searchPass(String uname) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT username, password FROM "+TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+        String a, b;
+        b = "not found";
+        if(cursor.moveToFirst()) {
+            do{
+                a = cursor.getString(0);
+
+                if(a.equals(uname)) {
+                    b = cursor.getString(1);
+                    break;
+                }
+            }
+            while(cursor.moveToNext());
+        }
+        cursor.close();
+        return b;
     }
 }

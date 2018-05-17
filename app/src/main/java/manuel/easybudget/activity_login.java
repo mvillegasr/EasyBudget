@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 public class activity_login extends AppCompatActivity {
 
+    DatabaseHelper mDatabaseHelper = new DatabaseHelper(this);
+
     String username;
     String password;
 
@@ -34,7 +36,9 @@ public class activity_login extends AppCompatActivity {
 
                 username = usernameInput.getText().toString();
                 password = passwordInput.getText().toString();
+                String pass = mDatabaseHelper.searchPass(username);
 
+                //sample user
                 if(username.equals("user") && password.equals("123")) {
 
                     //redirect to MainActivity
@@ -42,6 +46,15 @@ public class activity_login extends AppCompatActivity {
                     Intent intent=new Intent(activity_login.this,MainActivity.class);
                     startActivity(intent);
                 }
+
+                //if user exists
+                else if(pass.equals(password)) {
+                    //redirect to MainActivity
+                    showToast("Login Successful");
+                    Intent intent=new Intent(activity_login.this,MainActivity.class);
+                    startActivity(intent);
+                }
+
                 else {
                     showToast("Invalid username/password");
                 }
