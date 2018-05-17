@@ -1,5 +1,6 @@
 package manuel.easybudget;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -43,6 +44,9 @@ public class SignupActivity extends AppCompatActivity {
                 newuser.setPassword(passwd);
 
                 AddData(newuser);
+
+                Intent intent=new Intent(SignupActivity.this,activity_login.class);
+                startActivity(intent);
             }
         });
 
