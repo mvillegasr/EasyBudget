@@ -49,13 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
                 final TextView leftoverOutput = findViewById(R.id.leftoverOutput);
 
-
-
-                //display values
+                //display value
                 leftoverOutput.setText(String.valueOf(leftover));
-                showToast(String.valueOf(expectedIncome));
-                showToast(String.valueOf(rentMortgage));
-                showToast(String.valueOf(bills));
                 showToast("Calculation Complete");
             }
         });
