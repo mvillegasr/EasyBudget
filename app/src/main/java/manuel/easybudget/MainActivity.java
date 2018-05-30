@@ -7,23 +7,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.text.DecimalFormat;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    //user input variables
     double expectedIncome;
     double rentMortgage;
     double bills;
     double leftover;
 
-    //layout fields
     EditText expectedInput;
     EditText rentmortgageInput;
     EditText billsInput;
-
     Button calculateButton;
 
     @Override
@@ -31,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //link variables with those in layout
+        //link variables
         expectedInput = findViewById(R.id.expectedInput);
         rentmortgageInput = findViewById(R.id.rentmortgageInput);
         billsInput = findViewById(R.id.billsInput);
@@ -47,10 +45,13 @@ public class MainActivity extends AppCompatActivity {
                 bills = Double.valueOf(billsInput.getText().toString());
                 leftover = expectedIncome - rentMortgage - bills;
 
+                //set to currency format
+                DecimalFormat df = new DecimalFormat("$#,##0.00");
+
                 final TextView leftoverOutput = findViewById(R.id.leftoverOutput);
 
                 //display value
-                leftoverOutput.setText(String.valueOf(leftover));
+                leftoverOutput.setText(String.valueOf(df.format(leftover)));
                 showToast("Calculation Complete");
             }
         });
